@@ -1,12 +1,14 @@
 import { gsap, useGSAP } from "./lib/gsap";
 import { useRef } from "react";
+import { useMediaQuery } from "@uidotdev/usehooks";
 
 export function Stacks() {
   const containerRef = useRef<HTMLDivElement>(null);
   const imagosRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const isLg = useMediaQuery("(min-width: 992px)");
 
   useGSAP(() => {
-    if (!containerRef.current) return null;
+    if (!containerRef.current || !isLg) return null;
 
     const tl = gsap.timeline({
       defaults: { ease: "power2.out" },
@@ -27,62 +29,23 @@ export function Stacks() {
       y: 0,
       opacity: 1,
     });
-
-    // const tl = gsap.timeline({
-
-    //   scrollTrigger: {
-    //     trigger: containerRef.current,
-    //     start: "top 10%",
-    //     end: () => `+=${containerRef?.current?.scrollHeight || 1}`,
-    //     scrub: 1,
-    //     pin: true,
-    //     markers: true,
-    //   },
-    // });
-
-    // tl.fromTo(
-    //   imagosRefs.current[1],
-    //   {
-    //     opacity: 0,
-
-    //     y: 50,
-    //   },
-    //   {
-    //     opacity: 1,
-    //     ease: "power3.out",
-    //     y: 0,
-    //   }
-    // );
-
-    // tl.fromTo(
-    //   imagosRefs.current[2],
-    //   {
-    //     opacity: 0,
-    //     y: 50,
-    //   },
-    //   {
-    //     opacity: 1,
-    //     ease: "power3.out",
-    //     y: 0,
-    //   }
-    // );
   }, []);
 
   return (
     <div
       ref={containerRef}
-      className="h-screen relative overflow-hidden bg-slate-900 rounded-tl-4xl rounded-tr-4xl z-10"
+      className="-space-y-32 lg:space-y-0 lg:h-screen relative bg-slate-900 z-10"
     >
       <div
-        className="absolute inset-0"
+        className="static lg:absolute inset-0 rounded-tl-4xl rounded-tr-4xl overflow-hidden h-[20rem] lg:h-full"
         ref={(el) => {
           imagosRefs.current[0] = el;
         }}
       >
-        <img src="/images/image1.jpg" className="object-cover" />
+        <img src="/images/image1.jpg" className="object-cover " />
       </div>
       <div
-        className="absolute opacity-0 translate-y-[2rem] inset-0"
+        className="static lg:absolute lg:opacity-0 lg:translate-y-[2rem] inset-0 rounded-tl-4xl rounded-tr-4xl overflow-hidden lg:overflow-visible lg:-mt-20 h-[20rem] "
         ref={(el) => {
           imagosRefs.current[1] = el;
         }}
@@ -90,7 +53,7 @@ export function Stacks() {
         <img src="/images/image2.jpg" className="object-cover " />
       </div>
       <div
-        className="absolute opacity-0 translate-y-[2rem] inset-0"
+        className="static lg:absolute lg:opacity-0 lg:translate-y-[2rem] inset-0 rounded-tl-4xl rounded-tr-4xl overflow-hidden lg:overflow-visible lg:-mt-10 h-[20rem] lg:h-full"
         ref={(el) => {
           imagosRefs.current[2] = el!;
         }}

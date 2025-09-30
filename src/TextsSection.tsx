@@ -1,11 +1,15 @@
 import { useRef } from "react";
 import { gsap, useGSAP } from "./lib/gsap";
+import { useMediaQuery } from "@uidotdev/usehooks";
 
 export function TextsSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const textsRef = useRef<HTMLDivElement[]>([]);
+  const isMd = useMediaQuery("(min-width: 768px)");
 
   useGSAP(() => {
+    if (!isMd) return;
+    console.log("Miiw");
     const texts1: any = gsap.utils.toArray(".text-1");
 
     // Text 1 Animation
@@ -104,13 +108,13 @@ export function TextsSection() {
   return (
     <div
       ref={containerRef}
-      className="p-10 -mt-20 bg-slate-900 z-50 texts-container  rounded-tl-[100px] rounded-tr-[100px] flex flex-col justify-center items-center"
+      className="p-10 pt-20 gap-10 -mt-20 bg-slate-900 z-50 texts-container   flex flex-col justify-center items-center overflow-hidden"
     >
       <div
         ref={(el) => {
           if (el) textsRef.current[0] = el;
         }}
-        className="text-1 text-slate-100 text-[15rem]"
+        className="text-1 text-slate-100 text-5xl md:text-[8rem] lg:text-[12rem]"
       >
         Entrepreneur
       </div>
@@ -118,7 +122,7 @@ export function TextsSection() {
         ref={(el) => {
           if (el) textsRef.current[1] = el;
         }}
-        className="text-1 text-slate-100 text-6xl  text-[15rem]"
+        className="text-1 text-slate-100 text-5xl md:text-[8rem] lg:text-[12rem]"
       >
         Investor
       </div>
@@ -126,7 +130,7 @@ export function TextsSection() {
         ref={(el) => {
           if (el) textsRef.current[2] = el;
         }}
-        className="text-1 text-slate-100 text-[15rem] "
+        className="text-1 text-slate-100 text-5xl md:text-[8rem] lg:text-[12rem]"
       >
         Speaker
       </div>
@@ -134,7 +138,7 @@ export function TextsSection() {
         ref={(el) => {
           if (el) textsRef.current[3] = el;
         }}
-        className="text-1 text-slate-100 text-[10rem]"
+        className="text-1 text-slate-100 text-5xl md:text-[5rem] lg:text-[10rem]"
       >
         Mentor
       </div>

@@ -18,7 +18,7 @@ export function About() {
   }, []);
 
   return (
-    <div className="p-10 w-full  bg-slate-900 pb-30">
+    <div className="p-4 md:p-10 w-full  bg-slate-900 pb-30">
       <div className="max-w-screen-lg mx-auto">
         <h2 className="text-3xl">About</h2>
         <p className="text-2xl mt-4 leading-10">
